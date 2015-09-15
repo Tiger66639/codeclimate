@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Codeclimate by Tiger66639</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/Tiger66639/codeclimate">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/Tiger66639/codeclimate/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/Tiger66639/codeclimate/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Codeclimate</h1>
+          <p>Code Climate CLI</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/Tiger66639">Tiger66639</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="code-climate-cli" class="anchor" href="#code-climate-cli" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code Climate CLI<br>
+</h1>
+
+<p><a href="https://travis-ci.org/Tiger66639/codeclimate"><img src="https://travis-ci.org/Tiger66639/codeclimate.svg" alt="Build Status"></a></p>
+
+<h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p><code>codeclimate</code> is a command line interface for the Code Climate analysis
+platform. It allows you to run Code Climate engines on your local machine inside
+of Docker containers.</p>
+
+<h2>
+<a id="prerequisites" class="anchor" href="#prerequisites" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
+
+<p>The Code Climate CLI is distributed and run as a
+<a href="https://www.docker.com">Docker</a> image. The engines that perform the actual
+analyses are also Docker images. To support this, you must have Docker installed
+and running locally. We also require that the Docker daemon supports connections
+on the default Unix socket <code>/var/run/docker.sock</code>.</p>
+
+<p>On OS X, we recommend using <a href="http://boot2docker.io/">boot2docker</a>.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<div class="highlight highlight-text-shell-session"><pre><span class="pl-mo">docker pull codeclimate/codeclimate</span></pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-text-shell-session"><pre><span class="pl-mo">docker run \</span>
+<span class="pl-mo">  --interactive --tty --rm \</span>
+<span class="pl-mo">  --env CODE_PATH="$PWD" \</span>
+<span class="pl-mo">  --volume "$PWD":/code \</span>
+<span class="pl-mo">  --volume /var/run/docker.sock:/var/run/docker.sock \</span>
+<span class="pl-mo">  --volume /tmp/cc:/tmp/cc \</span>
+<span class="pl-mo">  codeclimate/codeclimate help</span></pre></div>
+
+<h2>
+<a id="packages" class="anchor" href="#packages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Packages</h2>
+
+<p>The above is very transparent. It's clear what's happening, and any changes
+required to work with your specific Docker setup can be discovered easily. That
+said, it can be unwieldy to invoke such a command on a regular basis.</p>
+
+<p>For this reason, we also provide packages that include a small wrapper script
+for the above invocation:</p>
+
+<h3>
+<a id="os-x" class="anchor" href="#os-x" aria-hidden="true"><span class="octicon octicon-link"></span></a>OS X</h3>
+
+<div class="highlight highlight-text-shell-session"><pre><span class="pl-mo">brew tap codeclimate/formulae</span>
+<span class="pl-mo">brew install codeclimate</span></pre></div>
+
+<h3>
+<a id="anywhere" class="anchor" href="#anywhere" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anywhere</h3>
+
+<div class="highlight highlight-text-shell-session"><pre><span class="pl-mo">curl -L https://github.com/codeclimate/codeclimate/archive/master.tar.gz | tar xvz</span>
+<span class="pl-mo">cd codeclimate-* &amp;&amp; sudo make install</span></pre></div>
+
+<h2>
+<a id="commands" class="anchor" href="#commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>Commands</h2>
+
+<p>A list of available commands is accessible by running <code>codeclimate</code> or
+<code>codeclimate help</code>.</p>
+
+<div class="highlight highlight-text-shell-session"><pre>$ <span class="pl-s1">codeclimate <span class="pl-c1">help</span></span>
+
+<span class="pl-mo">Available commands:</span>
+<span class="pl-mo">    analyze [-f format]</span>
+<span class="pl-mo">    console</span>
+<span class="pl-mo">    engines:disable engine_name</span>
+<span class="pl-mo">    engines:enable engine_name</span>
+<span class="pl-mo">    engines:install</span>
+<span class="pl-mo">    engines:list</span>
+<span class="pl-mo">    engines:remove</span>
+<span class="pl-mo">    help</span>
+<span class="pl-mo">    init</span>
+<span class="pl-mo">    validate-config</span>
+<span class="pl-mo">    version</span></pre></div>
+
+<p>The following is a brief explanation of each available command.</p>
+
+<ul>
+<li>
+<code>analyze</code>: Analyze all relevant files in the current working directory. All engines that are enabled in your <code>.codeclimate.yml</code> file will run, one after another. The <code>-f</code> (or <code>format</code>) argument allows you to set the output format of the analysis (using <code>json</code> or <code>text</code>).</li>
+<li>
+<code>console</code>: start an interactive session providing access to the classes within the CLI. Useful for engine developers and maintainers.</li>
+<li>
+<code>engines:disable engine_name</code>: Changes the engine's <code>enabled:</code> node to be <code>false</code> in your <code>.codeclimate.yml</code> file. This engine will not be run the next time your project is analyzed.</li>
+<li>
+<code>engines:enable engine_name</code>: Installs the specified engine (<code>engine_name</code>). Also changes the engine's <code>enabled:</code> node to be <code>true</code> in your <code>.codeclimate.yml</code> file. This engine will be run the next time your project is analyzed.</li>
+<li>
+<code>engines:install</code>: Compares the list of engines in your <code>.codeclimate.yml</code> file to those that are currently installed, then installs any missing engines.</li>
+<li>
+<code>engines:list</code>: Lists all available engines in the <a href="https://hub.docker.com/u/codeclimate/">Code Climate Docker Hub</a>.</li>
+<li>
+<code>engines:remove engine_name</code>: Removes an engine from your <code>.codeclimate.yml</code> file.</li>
+<li>
+<code>help</code>: Displays a list of commands that can be passed to the Code Climate CLI.</li>
+<li>
+<code>init</code>: Generates a new <code>.codeclimate.yml</code> file in the current working directory.</li>
+<li>
+<code>validate-config</code>: Validates the <code>.codeclimate.yml</code> file in the current working directory.</li>
+<li>
+<code>version</code>: Displays the current version of the Code Climate CLI.</li>
+</ul>
+
+<h2>
+<a id="copyright" class="anchor" href="#copyright" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copyright</h2>
+
+<p>See <a href="LICENSE">LICENSE</a></p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
