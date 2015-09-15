@@ -1,7 +1,6 @@
 # Code Climate CLI<br>
 
-[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
-
+[![Build Status](https://travis-ci.org/Tiger66639/codeclimate.svg)](https://travis-ci.org/Tiger66639/codeclimate)
 ## Overview
 
 `codeclimate` is a command line interface for the Code Climate analysis
